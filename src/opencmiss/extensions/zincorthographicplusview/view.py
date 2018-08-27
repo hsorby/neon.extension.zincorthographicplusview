@@ -22,6 +22,17 @@ class ZincOrthographicPlusView(BaseZincView):
 
         self._make_connections()
 
+    def get_orthographic_view(self, axis):
+        """
+        Return the Sceneveiwer widget for the given axis, axis must be one of 'x', 'y', or 'z'.
+        :param axis: one of 'x', 'y', or 'z'.
+        :return: Handle to Sceneviewer widget corresponding to axis.
+        """
+        return getattr(self._ui, '%sOrthographicView_widget' % axis)
+
+    def get_3d_view(self):
+        return self._ui.full3DView_widget
+
     def _make_connections(self):
         self._ui.xOrthographicView_widget.graphicsInitialized.connect(self._graphics_initialized)
         self._ui.yOrthographicView_widget.graphicsInitialized.connect(self._graphics_initialized)
